@@ -8,19 +8,31 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    var cars: [Cars] = testData
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        
+        NavigationView {
+            List(cars) { item in
+                Group {
+                    HStack {
+                        Image(item.imageName).resizable().frame(width: 32, height: 32)
+                        VStack(alignment: .leading) {
+                            Text(item.name)
+                            Text(item.model)
+                                .font(.subheadline)
+                                .foregroundColor(.gray)
+                        }
+                    }.navigationTitle("Cars")
+                }
+            }
         }
-        .padding()
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(cars: testData)
     }
 }
